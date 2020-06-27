@@ -14,7 +14,13 @@ import UIKit
 open class LicensesViewController: UIViewController {
 
   /// The tableView
-  public let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+  public let tableView: UITableView = { () -> UITableView in
+    if #available(iOS 13.0, *) {
+      return UITableView(frame: CGRect.zero, style: .insetGrouped)
+    } else {
+      return UITableView(frame: CGRect.zero, style: .grouped)
+    }
+  }()
 
   /// The tableView's UITableViewDataSource.
   var dataSource: LicensesDataSource!
